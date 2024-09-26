@@ -147,7 +147,7 @@ def print_tags(file_path):
 
 
 if __name__ == "__main__":
-    folder_path = '/Users/davideresigotti/Downloads/Finesse'
+    folder_path = input("Inserisci il percorso della cartella: ")
   
     manage_folder_tags(folder_path)
 
