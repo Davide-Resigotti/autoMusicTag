@@ -43,15 +43,17 @@ def manage_tags(file_path):
     
     
     # ------------------- EDIT TAGS -------------------
-
-    # Split the list of artists
-    if artists is None:
-        artists = artist
-    artists_list = ', '.join(artists).split(', ')
-        
-    # Get the main artist
-    principal_artist = artists[0] if artists else artist[0]
-    
+    if isinstance(artist, list):
+        principal_artist = artist[0]
+    else:
+        artist = artist[0]
+        if re.search(r"feat\.|&|,", artist):
+            artists_list = re.split(r"\s*feat.\s*|\s*&\s*|\s*,\s*", artist)
+            principal_artist = artists_list[0].strip()
+        else:
+            principal_artist = artist
+            artists_list = []
+            
     # Remove the main artist from the list of featured artists
     if principal_artist in artists_list:
         artists_list.remove(principal_artist)
@@ -125,7 +127,7 @@ def manage_tags(file_path):
     print("-----------------------------")
     print()
         
-    audio.save()
+    # audio.save()
     
     # Update the file name with the new title if it isn't already correct
     new_file_name = re.sub(r'.*\.mp3$', f"{new_title}.mp3", os.path.basename(file_path))
@@ -147,7 +149,7 @@ def print_tags(file_path):
 
 
 if __name__ == "__main__":
-    folder_path = input("Inserisci il percorso della cartella: ")
+    folder_path = "/Users/davideresigotti/Downloads/Umile"
   
     manage_folder_tags(folder_path)
 
