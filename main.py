@@ -127,7 +127,7 @@ def manage_tags(file_path):
     print("-----------------------------")
     print()
         
-    # audio.save()
+    audio.save()
     
     # Update the file name with the new title if it isn't already correct
     new_file_name = re.sub(r'.*\.mp3$', f"{new_title}.mp3", os.path.basename(file_path))
